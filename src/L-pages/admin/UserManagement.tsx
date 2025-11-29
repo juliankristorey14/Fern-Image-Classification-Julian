@@ -23,6 +23,7 @@ export default function UserManagement({ onLogout }: UserManagementProps) {
 
   const [currentUser, setCurrentUser] = useState<UserType | null>(null);
   const [users, setUsers] = useState<UserType[]>([]);
+  const [userScanCounts, setUserScanCounts] = useState<Record<string, number>>({});
   const [adminPermissions, setAdminPermissions] = useState({
     manageUsers: true,
     manageContent: true,
@@ -36,6 +37,23 @@ export default function UserManagement({ onLogout }: UserManagementProps) {
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
+
+  useEffect(() => {
+    const loadUserScanCounts = async () => {
+      const counts: Record<string, number> = {};
+      await Promise.all(
+        users.map(async (user) => {
+          const scans = await getUserScans(user.id);
+          counts[user.id] = scans.length;
+        })
+      );
+      setUserScanCounts(counts);
+    };
+
+    if (users.length > 0) {
+      loadUserScanCounts();
+    }
+  }, [users]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -202,7 +220,6 @@ export default function UserManagement({ onLogout }: UserManagementProps) {
                   </thead>
                   <tbody className="divide-y divide-[var(--color-neutral-200)]">
                     {filteredUsers.map((user) => {
-                      const userScans = getUserScans(user.id);
                       return (
                         <tr
                           key={user.id}
@@ -235,7 +252,7 @@ export default function UserManagement({ onLogout }: UserManagementProps) {
                             </span>
                           </td>
                           <td className="px-6 py-4 text-[var(--color-neutral-600)]">
-                            {userScans.length}
+                            {userScanCounts[user.id] || 0}
                           </td>
                           <td className="px-6 py-4 text-[var(--color-neutral-600)]">
                             {new Date(user.createdAt).toLocaleDateString()}
