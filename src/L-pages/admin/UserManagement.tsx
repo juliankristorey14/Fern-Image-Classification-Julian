@@ -431,14 +431,15 @@ export default function UserManagement({ onLogout }: UserManagementProps) {
             </div>
             <div 
               className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${users.find(u => u.id === selectedUser)?.role === 'admin' ? 'bg-blue-600' : 'bg-gray-200'}`}
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.stopPropagation();
                 if (!selectedUser) return;
                 const user = users.find(u => u.id === selectedUser);
                 if (user) {
                   const newRole = user.role === 'admin' ? 'user' : 'admin';
-                  updateUserRole(selectedUser, newRole);
-                  setUsers([...getAllUsers()]);
+                  await updateUserRole(selectedUser, newRole);
+                  const updatedUsers = await getAllUsers();
+                  setUsers(updatedUsers);
                 }
               }}
             >
