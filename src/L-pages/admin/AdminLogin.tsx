@@ -113,14 +113,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             </p>
           </div>
 
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-            <p className="text-sm text-blue-800">
-              <strong>Demo Admin:</strong><br />
-              Email: admin@fernid.com<br />
-              Password: any
-            </p>
-          </div>
-        </Card>
+                  </Card>
       </div>
     </div>
   );

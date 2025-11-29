@@ -115,18 +115,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-            <p className="text-sm text-blue-800">
-              <strong>Demo Accounts:</strong>
-              <br />
-              User: john@example.com
-              <br />
-              Admin: admin@fernid.com
-              <br />
-              Password: any
-            </p>
-          </div>
-        </Card>
+                  </Card>
       </div>
     </div>
   );
