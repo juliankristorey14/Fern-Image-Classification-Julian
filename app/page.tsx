@@ -105,20 +105,20 @@ export default function HomePage() {
             <div className={`relative mt-8 lg:mt-16 transform transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
-              <div className="relative w-full h-72 sm:h-80 flex justify-end items-end">
+              <div className="relative w-full h-72 sm:h-80 md:h-96 flex justify-center items-center max-[768px]:h-64">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
                 <div className="relative z-10">
                   {/* CardSwap Hero Component */}
                   <CardSwap
-                    width={400}
-                    height={280}
-                    cardDistance={40}
-                    verticalDistance={50}
+                    width={320}
+                    height={224}
+                    cardDistance={32}
+                    verticalDistance={40}
                     delay={4000}
                     pauseOnHover={true}
-                    skewAmount={4}
+                    skewAmount={3}
                     easing="elastic"
-                    className="scale-90 sm:scale-100 lg:translate-x-6"
+                    className="scale-90 sm:scale-95 lg:scale-100"
                   >
                     {fernImages.map((image, index) => (
                       <SwapCard key={index} className="overflow-hidden rounded-xl">
